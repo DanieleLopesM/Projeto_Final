@@ -1,0 +1,18 @@
+LEGENDA -------------> DESCRIÇÃO
+Tempo ---------------> O registro de data e hora dos dados registrados no formato AAAA-MM-DD HH:MM:SS.	
+Delta_Energia -------> A diferença no consumo de energia em Watt-hora (Wh) do registro de data e hora anterior para o registro de data e hora atual.	
+GHI -----------------> Irradiância Horizontal Global em Watts por metro quadrado (W/m²) medida por um piranômetro, que é a quantidade de radiação solar recebida por uma superfície horizontal.	
+Temperatura ---------> A temperatura em graus Celsius (°C) medida na mesma altura do piranômetro.	
+Pressão -------------> A pressão atmosférica em hectopascais (hPa) medida na mesma altura do piranômetro.
+Umidade -------------> A umidade relativa em porcentagem (%) medida na mesma altura do piranômetro.	
+Velocidade_Vento ----> A velocidade do vento em metros por segundo (m/s) medida na mesma altura do piranômetro.	
+Precipitacao_1h -----> A quantidade de precipitação em milímetros (mm) medida na última hora.
+Neve_1h -------------> A quantidade de neve em milímetros
+Nuvens --------------> A situação da nuvem
+Sol	
+Horas_de_Sol	
+Duracao_Dia	
+Luz_Solar_Hora/Duração_do_Dia	
+Tipo_Tempo	
+Hora	
+Mês

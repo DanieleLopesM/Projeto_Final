@@ -160,14 +160,16 @@ ggplot()+
   labs(x = "Dias", y = "Média de Radiação Solar (W/m²)", color = "Anos", linetype = "Anos", fill = "Anos")+
   labs(title = "Gráfico 01 - Médias de Radiação Solar por Dias de Janeiro")+
   theme_bw()+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold"))
 ```
 
 
 <div style="text-align: justify; font-size: 16px;"> 
 O gráfico apresenta uma variação no nivel de radiação, sendo que esta variação pode ser devido ao clima do local. 
 
-Para realizar uma analise das formas de cobertura de céu mais propicias nos anos, foram realizados a separação dos dados de acordo com as especificações dos dias, sendo elas, céu aberto, parcialmente aberto, parcialmente nublado, nublado e chuvoso.
+Para realizar uma analise das formas de cobertura de céu mais recorrentes nos anos de 2017 e 2021, foram realizados a separação dos dados de acordo com as especificações dos dias, sendo elas, céu aberto, parcialmente aberto, parcialmente nublado, nublado e chuvoso.
+
+O gráfico 02, apresenta a porcentagem de acordo com as coberturas de céu mais recorrentes. Sendo que no caso a que mais se repete é a cobertura de céu do tipo nublado. 
 </div>
 
 
@@ -233,6 +235,7 @@ mapeamento <- data.frame(n = 1:5, nome = nomes)
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
 
+## GRÁFICO DE BARRAS PARA OS DADOS POR ANO
 # Plotar as barras lado a lado para cada ano
 ggplot(dados_combinados, aes(x = n, y = tipo_tempo, fill = Ano)) +
   geom_col(position = position_dodge(width = 0.8), width = 0.7) +
@@ -248,20 +251,163 @@ ggplot(dados_combinados, aes(x = n, y = tipo_tempo, fill = Ano)) +
   ## reduzir o espaçamento entre rótulos e barras
   scale_x_continuous(expand = c(.01, .01)) +
   
+  
   ## remover todos os elementos, exceto rótulos do eixo y + ajustar margem do gráfico
   theme_void() +
   theme(axis.text.y = element_text(size = 12, hjust = 1, family = "Fira Sans"),
         plot.margin = margin(rep(15, 4)))+
 
   labs(title = "Gráfico 02 - Relação das Coberturas de Céu de acordo com os Anos")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold"))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+## Criando um id para os dados
+dados <- dados %>% 
+  mutate(ID = row_number());
+
+#### DADOS DE 2017
+## Separando os dados
+dados_ghi_2017 <- dados %>%
+  filter(ano != 2021)
+
+## Criando uma tabela de id e GHI
+dados_ghi_2017 <- cbind(dados_ghi_2017$ID, dados_ghi_2017$ghi, dados_ghi_2017$mes)
+dados_ghi_2017 = as.data.frame(dados_ghi_2017)
+
+
+##################
+#### DADOS DE 2017
+## Separando os dados
+dados_ghi_2021 <- dados %>%
+  filter(ano != 2017)
+
+## Criando uma tabela de id e GHI
+dados_ghi_2021 <- cbind(dados_ghi_2021$ID, dados_ghi_2021$ghi, dados_ghi_2021$mes)
+dados_ghi_2021 = as.data.frame(dados_ghi_2021)
+
 
 ```
 
 
+<div style="text-align: justify; font-size: 16px;"> 
+O gráfico apresenta a distribuição da radiação solar global horizontal ao longo do ano, sendo que os pontos de maiores indices de radição é no meio do ano, como pode ser visto no Gráfico 03, que trás os dados do ano de 2017.  
+</div>
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+
+
+### PLOT DO GRAFICO -- 2017
+ggplot(dados_ghi_2017, aes(x = V1, y = V2)) +
+  geom_point(color = "#BA55D3", size = 0.5) +
+  xlab("Meses de 2017") +
+  ylab("Irradiância Horizontal Global (W/m²)") +
+  
+  ## reduzir o espaçamento entre rótulos e barras
+  scale_x_continuous(expand = c(.01, .01)) +
+  
+   ## reduzir o espaçamento entre rótulos e barras
+  scale_y_continuous(expand = c(.02, .02)) +
+  
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, family = "Fira Sans"),
+    axis.title = element_text(size = 12, family = "Fira Sans"),
+    plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold")) +
+  labs(title = "Gráfico 03 - Distribuição da Irradiância Solar Global ao longo do Ano de 2017")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+<br>
+<div style="text-align: justify; font-size: 16px;"> 
+O Gráfico 04 trás os dados do ano de 2021, que também nos mostra o nivel de radiação ao longo do ano.
+</div>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+### PLOT DO GRAFICO -- 2021
+ggplot(dados_ghi_2021, aes(x = V1, y = V2)) +
+  geom_point(color = "#20B2AA", size = 0.5) +
+  xlab("Meses de 2021") +
+  ylab("Irradiância Horizontal Global (W/m²)") +
+  
+  ## reduzir o espaçamento entre rótulos e barras
+  scale_x_continuous(expand = c(.01, .01)) +
+  
+   ## reduzir o espaçamento entre rótulos e barras
+  scale_y_continuous(expand = c(.02, .02)) +
+  
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, family = "Fira Sans"),
+    axis.title = element_text(size = 12, family = "Fira Sans"),
+    plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold")) +
+  labs(title = "Gráfico 04 - Distribuição da Irradiância Solar Global ao longo do Ano de 2021")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+<br>
+<div style="text-align: justify; font-size: 16px;"> 
+Em ambos os gráficos é possivel ver a viariação do indice de radiação em relação aos anos, se fossem analisados dados de uma sequencia de anos seria possivel observar a variação da radiação, o grafico aresentado seria descrito como sendo uma onda, onde o seu pico seria o maior indice de radiação eo seu vale o menor. 
+O estudo realizado por Calça et al. (2019), teve como objetivo a detecção de outliers nas medidas de radiação obtidas no Laboratório de Radiometria Solar  da  Faculdade  de  Ciências  Agronômicas  (Universidade Estadual Paulista “Júlio de Mesquita Filho”) de Botucatu, São Paulo,  Brasil. Este estudo apresentou (Figura 01) gráficos gerados pelos autores, onde é possivel analisar as ondas formadas pelos dados.
+</div>
+
+<br>
+
+<div style="text-align: center; font-size: 16px;"> 
+  **Figura 01 - Distribuição  Sequencial  das  Medidas  Antes  da  Aplicação <br>
+  do Procedimento de Controle de Qualidade.** 
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/04.png" alt="Gráfico de dados" width="700" >
+</div>
+
+<br>
+<div style="text-align: justify; font-size: 16px;"> 
+No gáfico gerado com os dados utilizados que foram coletados da Polonia, é possivel ver que a onde de dispersão de dados coletados tambem gera pontos de picos e vales. Em uma comparação dos dados é possivel analisar que a irradiância horizontal global em W/m² é diferente nos locais, sendo que na Polonia (Gráfico 05) o pico de irradiação de se no meio do ano, já em Botucatu, no Brasil, seus picos são no final e inicio de cada ano. 
+</div>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+#### DADOS DE 2017 e 2021
+## Criando uma tabela de id e GHI
+dados_ghi<- cbind(dados$ID, dados$ghi)
+dados_ghi= as.data.frame(dados_ghi)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=3.5, fig.align='center'}
+### PLOT DO GRAFICO -- 2017 e 2021
+ggplot(dados_ghi, aes(x = V1, y = V2)) +
+  geom_point(color = "#fdd500", size = 0.5) +
+  xlab("Meses de 2017 e 2021") +
+  ylab("Irradiância Horizontal Global (W/m²)") +
+  
+  ## reduzir o espaçamento entre rótulos e barras
+  scale_x_continuous(expand = c(.01, .01)) +
+  
+   ## reduzir o espaçamento entre rótulos e barras
+  scale_y_continuous(expand = c(.02, .02)) +
+  
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 10, family = "Fira Sans"),
+    axis.title = element_text(size = 12, family = "Fira Sans"),
+    plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold")) +
+  labs(title = "Gráfico 05 - Distribuição da Irradiância Solar Global ao longo do Ano de 2017 e 2021")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+```
+
 
 ### Referências
-<div style="text-align: justify"> 
+<div style="text-align: justify">
+
+CONTES CALÇA, M. V.; RANIERO, M. R.; FERNANDO, D. M. Z.; RODRIGUES, S. A.; DAL PAI, A. Outliers Detection in a Quality Control Procedure for Measurements of Solar Radiation. IEEE Latin America Transactions, [S. l.], v. 17, n. 11, p. 1815–1822, 2019. Disponível em: https://latamt.ieeer9.org/index.php/transactions/article/view/1490. Acesso em: 10 jul. 2023.
 
 IQBAL, M. An Introduction to Solar Radiation. Ontario: Academic Press Canada,1983.
 

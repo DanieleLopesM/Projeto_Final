@@ -19,79 +19,36 @@ from sklearn.preprocessing import LabelEncoder # transformação de dados
 
 # In[ ]:
     
-df_solar = pd.read_csv('solar_weather.csv', delimiter =',')
+df_solar = pd.read_csv('dadosR.csv', delimiter =',')
 df_solar
 
-#Características das variáveis do dataset
-df_solar.info()
+#selecionar somente mes Janeiro
+
+df2 = df_solar.query('mes == 1')
 
 #Estatísticas univariadas
-df_solar.describe()
+df2.describe()
 
-# In[ ]: Gráfico 3D com scatter
+#Características das variáveis do dataset
+df2.info()
 
-import plotly.io as pio
-pio.renderers.default = 'browser'
+#%% Histograma - continuar grafico
 
-trace = go.Scatter3d(
-    x=df_solar['temp'], 
-    y=df_solar['pressure'], 
-    z=df_solar['month'], 
-    mode='markers',
-    marker={
-        'size': 5,
-        'opacity': 0.8,
-    },
-)
+# A seguir, vamos elaborar o histograma de energia radiação  (GHI)
+# O banco de dados é o mesmo que já utilizamos anteriormente
 
-layout = go.Layout(
-    margin={'l': 0, 'r': 0, 'b': 0, 't': 0},
-    width=800,
-    height=800,
-)
+# Iniciando com o gráfico básico utilizando o próprio pandas dataframe com o método "hist"
 
-data = [trace]
-
-plot_figure = go.Figure(data=data, layout=layout)
-plot_figure.update_layout(scene = dict(
-                        xaxis_title='temp',
-                        yaxis_title='pressure',
-                        zaxis_title='month'))
-plot_figure.show()
+df2['ghi'].hist(bins=5)
 
 
+#%%
 
-# In[ ]: Estimação de um modelo OLS linear
-modelo_linear = sm.OLS.from_formula('temp ~ month', df_solar).fit()
+# Na forma por categoria dos pontos ("style")
 
-#Observar os parâmetros resultantes da estimação
-modelo_linear.summary()
-
-
- 
-# In[ ]: Teste de verificação da aderência dos resíduos à normalidade
-
-# Teste de Shapiro-Wilk (n < 30)
-#from scipy.stats import shapiro
-#shapiro(modelo_linear.resid)
-
-# Teste de Shapiro-Francia (n >= 30)
-# Instalação e carregamento da função 'shapiro_francia' do pacote
-#'statstests.tests'
-# Autores do pacote: Luiz Paulo Fávero e Helder Prado Santos
-# https://stats-tests.github.io/statstests/
-# pip install statstests
-from statstests.tests import shapiro_francia
-shapiro_francia(modelo_linear.resid)
-
-# Interpretação
-teste_sf = shapiro_francia(modelo_linear.resid) #criação do objeto 'teste_sf'
-teste_sf = teste_sf.items() #retorna o grupo de pares de valores-chave no dicionário
-method, statistics_W, statistics_z, p = teste_sf #definição dos elementos da lista (tupla)
-print('Statistics W=%.5f, p-value=%.6f' % (statistics_W[1], p[1]))
-alpha = 0.05 #nível de significância
-if p[1] > alpha:
-	print('Não se rejeita H0 - Distribuição aderente à normalidade')
-else:
-	print('Rejeita-se H0 - Distribuição não aderente à normalidade')
+sns.scatterplot(data=atlas_ambiental, x="ghi", y="ano", size="idade", hue="color", style="style")
+plt.title("Indicadores dos Distritos do Município de São Paulo")
+plt.xlabel('Renda',fontsize=12)
+plt.ylabel('Escolaridade',fontsize=12)
+plt.show()
 

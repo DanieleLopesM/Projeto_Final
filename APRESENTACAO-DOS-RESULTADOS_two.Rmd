@@ -413,15 +413,16 @@ library(tidyverse)
 # Hexbin chart with default option
   ggplot(jan, aes(x=temperatura, y=ghi) ) +
   geom_hex() +
-  labs (title = "GrÃ¡fico 06 Variação da Irradiação pela Temperatura") +
-  theme(plot.title = element_text(hjust = 0.3))
-  theme_bw()
+  labs(title = "GrÃ¡fico 06 Variação da Irradiação pela Temperatura") +
+  theme(plot.title = element_text(size = 12, hjust = 0.5, family = "Fira Sans", face = "bold")) +
+  labs(title = "GrÃ¡fico 06 Variação da Irradiação pela Temperatura")+
+  theme(plot.title = element_text(hjust = 0.5))
  
 # Bin size control + color palette
 ggplot(jan, aes(x=temperatura, y=ghi) ) +
   geom_hex(bins = 70) +
   scale_fill_continuous(type = "viridis") +
-  theme_bw()
+  theme()
 ```
 
 

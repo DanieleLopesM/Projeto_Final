@@ -1,0 +1,48 @@
+ Grafico radiação ( Ano / Temperatura)
+
+Foram importados os pacotes necessários:
+    
+import pandas as pd # manipulação de dado em formato de dataframe
+import seaborn as sns # biblioteca de visualização de informações estatísticas
+import matplotlib.pyplot as plt # biblioteca de visualização de dados
+import statsmodels.api as sm # biblioteca de modelagem estatística
+import numpy as np # biblioteca para operações matemáticas multidimensionais
+from statsmodels.iolib.summary2 import summary_col # comparação entre modelos
+import plotly.graph_objs as go # gráfico 3D
+from scipy.stats import pearsonr # correlações de Pearson
+from sklearn.preprocessing import LabelEncoder # transformação de dados
+
+# In[ ]:Importação do dataset e seleção das variáveis somente do mês de janeiro para analise
+    
+df_solar = pd.read_csv('dadosR.csv', delimiter =',')
+df_solar
+
+#selecionar somente mes Janeiro
+
+df2 = df_solar.query('mes == 1')
+
+#Estatísticas univariadas
+df2.describe()
+
+#Características das variáveis do dataset
+df2.info()
+
+import matplotlib
+print('matplotlib: {}'.format(matplotlib.__version__))
+
+
+# Iniciando com o gráfico básico (scatterplot)
+# Neste caso, devemos especificar as variáveis dos eixos x e y no
+
+sns.scatterplot(df2, x="ano", y="ghi")
+
+# Vamos formatar um pouco mais o gráfico
+
+sns.lineplot(df2, x="ano", y="ghi", hue="temperatura", marker="o")
+
+plt.title("Radiação")
+plt.xlabel('ano',fontsize=12)
+plt.ylabel('energia',fontsize=12)
+plt.legend(title='temperatura')
+plt.show()
+

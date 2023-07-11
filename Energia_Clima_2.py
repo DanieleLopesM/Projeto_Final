@@ -29,26 +29,74 @@ df2 = df_solar.query('mes == 1')
 #Estatísticas univariadas
 df2.describe()
 
+#%% Gerando estatísticas descritivas
+
+# Tabela de estatísticas descritivas para variáveis quantitativas
+
+descritivas = df2[['ghi', 'ano']]
+
+descritivas.describe()
+
+
+
 #Características das variáveis do dataset
 df2.info()
 
-#%% Histograma - continuar grafico
+#%%
 
-# A seguir, vamos elaborar o histograma de energia radiação  (GHI)
-# O banco de dados é o mesmo que já utilizamos anteriormente
-
-# Iniciando com o gráfico básico utilizando o próprio pandas dataframe com o método "hist"
-
-df2['ghi'].hist(bins=5)
+import matplotlib
+print('matplotlib: {}'.format(matplotlib.__version__))
 
 
 #%%
 
-# Na forma por categoria dos pontos ("style")
+# Iniciando com o gráfico básico (scatterplot)
+# Neste caso, devemos especificar as variáveis dos eixos x e y no
 
-sns.scatterplot(data=atlas_ambiental, x="ghi", y="ano", size="idade", hue="color", style="style")
-plt.title("Indicadores dos Distritos do Município de São Paulo")
-plt.xlabel('Renda',fontsize=12)
-plt.ylabel('Escolaridade',fontsize=12)
+sns.scatterplot(df2, x="ano", y="ghi")
+
+#%%
+
+# vamos implementar o seguinte gráfico
+# Note que vamos separar cada temperatura por meio da cor do gráfico
+
+sns.lineplot(df2, x="ano", y="ghi", hue="temperatura")
+
+#%%
+
+# Vamos formatar um pouco mais o gráfico
+
+sns.lineplot(df2, x="ano", y="ghi", hue="temperatura", marker="o")
+
+plt.title("Radiação")
+plt.xlabel('ano',fontsize=12)
+plt.ylabel('energia',fontsize=12)
+plt.legend(title='temperatura')
 plt.show()
 
+
+#%% Gráfico de Calor
+
+# Vamos gerar um gráfico de calor que distingue informações por meio de cores
+# O banco de dados contém informações sobre o tempo para chegar à escola
+# Fonte: Fávero & Belfiore (2017, Capítulo 12)
+
+ano_ghi = pd.read_csv("dadosR.csv")
+
+
+#%%
+
+# Inicialmente, vamos selecionar as variáveis quantitativas do banco de dados
+
+df2 = ano_ghi[['ano','ghi','temperatura']]
+
+# Vamos trabalhar o gráfico de calor no contexto das correlações entre variáveis
+# Portanto, primeiramente, vamos criar a matriz de correlações (função "cor")
+# Lembrando: selecionar apenas as variáveis quantitativas da base de dados
+
+corr = ano_ghi.corr()
+#%%
+
+# Agora vamos elaborar um gráfico de calor (heatmap) com algumas formatações
+
+sns.heatmap(corr, center=0)

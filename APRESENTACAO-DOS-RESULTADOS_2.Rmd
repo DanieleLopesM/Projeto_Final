@@ -1,0 +1,275 @@
+---
+title: "ANALISE E APRESENTAÇÃO DE DADOS RELACIONADOS A GERAÇÃO DE ENERGIA LIMPA"
+author: "Daniele Cristina Lopes Mariano; Eliane Graciela Pilan; Eduardo da Conceição Rosário."
+date: "2023.07.04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1 Introdução
+
+<div style="text-align: justify; font-size: 16px;"> 
+A queima de combustíveis fosseis para a geração de energia é um dos fatores principais a se
+levar em consideração quando pensamos em geração de energia limpa. A matriz energética brasileira é em grande parte composta de energia limpa, porém, é dependente da energia produzida por hidroelétricas, para que este cenário mude é essencial que se inicie pesquisas e projetos nas demais formas de geração de energia limpa.
+
+Quando atinge a superfície terrestre, a radiação solar pode ter amplas
+aplicações em diferentes atividades da sociedade, de forma que, guarda grande
+importância para a fotossíntese vegetal, com relação a produção de biomassa, ciclo
+hidrológico, devido aos processos de evaporação e precipitação, refletividade de
+superfícies, dinâmica da atmosfera e dos oceanos, iluminação passiva e ativa de
+ambientes e processos fotoquímicos. Além dos processos pontuados, destaca-se
+também a importância da energia solar para o planejamento e aproveitamento da sua
+potência energética térmica e fotovoltaica pelo setor elétrico Brasileiro, a fim de
+garantir o atendimento da demanda crescente de energia elétrica existente no
+território nacional (IQBAL, 1983; VAREJÃO-SILVA, 2006; PEREIRA et al., 2017).
+
+</div>
+
+
+### 1.1 Objetivo
+<div style="text-align: justify; font-size: 16px;"> 
+>O objetivo deste projeto é realizar a análise dos dados relacionados ao clima obtidos através do dataset, onde é possível correlacionar variáveis do clima e determinar relação entre as possíveis formas de geração de energia. Será realizado testes estatísticos. com o o auxilio dos pacotes do Rstudio. 
+Posteriormente as analises será realizada a compilação dos resultados obtidos no formato de gráficos, para que a visualização final seja mais clara e objetiva. Todo o projeto será disponibilizado no GitHub, assim como os dados da analise e scripts do Rstudio, além disso para que tenhamos uma apresentação mais organizada, criaremos um Markdown, para exibir todos os resultados.
+
+</div>
+
+## 2 Materiais e Métodos
+
+<div style="text-align: justify; font-size: 16px;"> 
+Para a realização da análise, foi utilizado um banco de dados coletados na Polônia, onde contém informações sobre o consumo de energia e parâmetros climáticos, como radiação solar, temperatura, pressão, umidade, velocidade do vento e precipitação. 
+
+O database ainda apresenta a coluna “Energy Delta (Wh)” informações sobre mudanças no consumo de energia em um determinado período de tempo, a coluna “GHI” que mede a irradiação solar recebida por uma superfície horizontal, além disso informações sobre a presença de luz solar, período de duração do sol, informações climáticas. O banco de dados foi organizado de forma que seja facilitado o seu desenvolvimento e estudo, para que seja possível realizar uma relação entre a geração de energia renovável e os padrões climáticos ao longo do tempo. De todo o banco de dados disponibilizado, foi utilizado apenas dois anos, sendo os anos de 2017 e 2021, para que fosse possível analisar o diferencial para cada ano. 
+
+</div>
+
+<br>
+
+#### **Tabela 01 -** Variáveis e Descrição 
+
+<br>
+
+| Nome da Variável | Descrição | 
+| -------- | -------- | 
+| Tempo | O registro de data e hora dos dados registrados no formato AAAA-MM-DD HH:MM:SS. | 
+| Delta Energia | A diferença no consumo de energia em Watt-hora (Wh) do registro de data e hora anterior para o registro de data e hora atual. | 
+| GHI | Irradiância Horizontal Global em Watts por metro quadrado (W/m²) medida por um piranômetro, que é a quantidade de radiação solar recebida por uma superfície horizontal. | 
+| Temperatura | A temperatura em graus Celsius (°C) medida na mesma altura do piranômetro. | 
+| Pressão | A pressão atmosférica em hectopascais (hPa) medida na mesma altura do piranômetro. | 
+| Umidade | A umidade relativa em porcentagem (%) medida na mesma altura do piranômetro. | 
+| Velocidade do Vento | A velocidade do vento em metros por segundo (m/s) medida na mesma altura do piranômetro. | 
+| Delta Energia | Representa a mudança no consumo de energia durante um determinado período de tempo. |
+| Precipitação por Hora | Apresenta a precipitação de chuva por hora. |
+| Neve por Hora | Apresenta a quantidade de neve por hora na cidade. |
+| Nuvens | A proporção de nuvens no céu. |
+| Sol | Se há radiação solar(1) ou não(0). |
+| Horas de Sol | A duração da luz do dia |
+| Duração do Dia | Quantidade de tempo durante a qual a luz solar está disponível |
+| Luz Solar por Hora / Duração do Dia | Quantidade de luz solar em relação a duração do dia. |
+| Tipo de Tempo | Fornece informações sobre as condições climáticas gerais, como claro, nublado ou chuvoso |
+| Hora | Hora da coleta dos dados. |
+| Mês | Mês da coleta dos dados. |
+
+<div style="text-align: justify"> 
+>Abaixo esta descrito os links para o acesso ao GitHub, onde é possivel encontrar toda a documentação da analise e a interação realizada para a elaboração deste projeto. Além disso tambem esta disponivel o link de acesso ao database, para que projeto futuros tenham acesso aos dados utiizados.
+
+</div>
+
+
+<div style="display: flex; align-items: center;">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/github.png" alt="GitHub" width="50" height="50">
+  <p>
+  **Link de Acesso ao Repositório:** https://github.com/DanieleLopesM/Projeto_Final
+</div>
+
+
+<div style="display: flex; align-items: center;">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/01.png" alt="Banco de Dados" width="50" height="50">
+  <p>
+  **Banco de dados que será utilizado:** https://l1nq.com/gvU8N</p>
+</div>
+
+<br>
+
+### 2.1 Processo de Analise do Banco de Dados
+<div style="text-align: justify; font-size: 16px;"> 
+Para a leitura dos dados, antes foi realizada algumas alterações na sua formatação inicial para que fosse possivel realizar as analises de forma mais precisa e eficas. Foi inserida uma coluna auxiliar nos dados para que sejam filtrados as horas, minutos, dias, meses e anos de cada coleta realizada, possibilitando que seja comparado os valores do ano de 2017 e 2021. Além 
+</div>
+
+<div style="text-align: justify; font-size: 16px;"> 
+Para iniciar as analises, primeiramente é necessario realizar a inicialização das bibliotecas e pacotes necessarias para o projeto.
+</div>
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+<br>
+
+<div style="text-align: justify; font-size: 16px;"> 
+Com as bibliotecas iniciaizadas, realiza-se a leitura dos dados.
+</div>
+
+```{r message=FALSE, warning=FALSE}
+dados =  read.csv("dadosR.csv")
+```
+<br>
+
+<div style="text-align: justify; font-size: 16px;"> 
+Foi realizado um filtro para que apenas dados do mês de Janeiro dos anos sejam considerados na analise. 
+</div>
+```{r message=FALSE, warning=FALSE}
+jan =  filter(dados, mes == "1")
+jan17 =  filter(jan, ano == "2017")
+jan21 =  filter(jan, ano == "2021")
+```
+<br>
+
+<div style="text-align: justify; font-size: 16px;"> 
+Também foi realizada uma média diaria dos valores coletados, já que os dados foram coletados a cada 15 minutos, com dados diarios é possivel analisar melhor a eficiencia diariamente.  
+</div>
+```{r message=FALSE, warning=FALSE}
+media_por_dia_17 <- jan17 %>%
+  group_by(dia) %>%
+  summarize(media = mean(ghi))
+
+media_por_dia_21 <- jan21 %>%
+  group_by(dia) %>%
+  summarize(media = mean(ghi))
+
+```
+<br>
+
+<div style="text-align: justify; font-size: 16px;"> 
+Com a separação dos dados realizada foi elaborado um gráfico utilizando o pacote GGPLOT (Grafico 01), para que fosse possivel analisar as médias de radiação solar, inicialmente do mês de janeiro de cada ano, sendo possivel observar a variação de radiação nos diferentes anos.  
+</div>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+library(rcartocolor)
+cores <- carto_pal(9, name = "Bold")
+
+##GRÁFICO DE DENSIDADE DE JANEIRO DE 2017 E 2021.
+ggplot()+
+  geom_density(data = media_por_dia_17, aes(x = dia, color = "2017", fill = "2017", linetype = "2017"), alpha = 0.6)+
+  geom_density(data = media_por_dia_21, aes(x = dia, color = "2021", fill = "2021", linetype = "2021"), alpha = 0.6)+
+  scale_x_continuous(trans = "log10")+
+  scale_color_manual(values = cores[1:2])+
+  scale_fill_manual(values = cores[1:2])+
+  labs(x = "Dias", y = "Média de Radiação Solar (W/m²)", color = "Anos", linetype = "Anos", fill = "Anos")+
+  labs(title = "Gráfico 01 - Médias de Radiação Solar por Dias de Janeiro")+
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+<div style="text-align: justify; font-size: 16px;"> 
+O gráfico apresenta uma variação no nivel de radiação, sendo que esta variação pode ser devido ao clima do local. 
+
+Para realizar uma analise das formas de cobertura de céu mais propicias nos anos, foram realizados a separação dos dados de acordo com as especificações dos dias, sendo elas, céu aberto, parcialmente aberto, parcialmente nublado, nublado e chuvoso.
+</div>
+
+
+```{r include=FALSE, message=FALSE, warning=FALSE}
+function(tidyverse)
+library(tidyverse)
+
+#### FORMATAÇÃO DOS DADOS DO TIPO DE TEMPO DE 2017.
+tipo_tempo_2017 <- dados %>% 
+  ## Filtrando para utilizar dados de 2017
+  dplyr::filter(ano == 2017) %>%
+  dplyr::mutate(
+    tipo_tempo = stringr::str_to_title(tipo_tempo),
+    tipo_tempo = forcats::fct_lump(tipo_tempo, n = 5)
+  ) %>% 
+  ## Adiciona contagem
+  dplyr::count(tipo_tempo, sort = TRUE) %>% 
+  ## Ordene os níveis de fator por número, coloque "Outro" no final
+  dplyr::mutate(
+    tipo_tempo = forcats::fct_rev(forcats::fct_inorder(tipo_tempo))
+  )
+
+#### FORMATAÇÃO DOS DADOS DO TIPO DE TEMPO DE 2021.
+tipo_tempo_2021 <- dados %>% 
+  ## Filtrando para utilizar dados de 2017
+  dplyr::filter(ano == 2021) %>%
+  dplyr::mutate(
+    tipo_tempo = stringr::str_to_title(tipo_tempo),
+    tipo_tempo = forcats::fct_lump(tipo_tempo, n = 5)
+  ) %>% 
+  ## Adiciona contagem
+  dplyr::count(tipo_tempo, sort = TRUE) %>% 
+  ## Ordene os níveis de fator por número, coloque "Outro" no final
+  dplyr::mutate(
+    tipo_tempo = forcats::fct_rev(forcats::fct_inorder(tipo_tempo))
+  )
+```
+
+```{r include=FALSE, message=FALSE, warning=FALSE}
+## GRAFICO DE BARRAS COM OS DADOS DE 2017 E 2021 EM RELAÇÃO AO TIPO DE TEMPO.
+
+# Adicionando a porcentagem nos dados
+tipo_tempo_2017 <- tipo_tempo_2017 %>% 
+  ## add percentage label with `sprintf()`
+  dplyr::mutate(perc = paste0(sprintf("%4.1f", n / sum(n) * 100), "%"))
+
+tipo_tempo_2017
+
+tipo_tempo_2021 <- tipo_tempo_2021 %>% 
+  ## add percentage label with `sprintf()`
+  dplyr::mutate(perc = paste0(sprintf("%4.1f", n / sum(n) * 100), "%"))
+
+tipo_tempo_2021
+
+# Criar um novo conjunto de dados combinando os dados de 2017 e 2021
+dados_combinados <- rbind(cbind(tipo_tempo_2017, Ano = "2017"), cbind(tipo_tempo_2021, Ano = "2021"))
+
+# Criar um novo conjunto de dados com os mapeamentos entre números e nomes
+nomes <- c("Aberto", "Parc. Aberto", "Parc. Nublado", "Nublado", "Chuvoso")
+mapeamento <- data.frame(n = 1:5, nome = nomes)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=5, fig.align='center'}
+
+# Plotar as barras lado a lado para cada ano
+ggplot(dados_combinados, aes(x = n, y = tipo_tempo, fill = Ano)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  scale_fill_manual(values = c("2017" = "#BA55D3", "2021" = "#20B2AA")) +
+  labs(fill = "Ano") +
+
+  ## Inserindo a porcentagem
+  geom_text(aes(label = perc), position = position_dodge(width = 0.8), vjust = 0.5, hjust = 1.1, size = 3.5, color = "white", fontface = "bold") +
+  
+  ## Inserindo as descrições do eixo Y
+  scale_y_discrete(breaks = mapeamento$n, labels = mapeamento$nome) +
+  
+  ## reduzir o espaçamento entre rótulos e barras
+  scale_x_continuous(expand = c(.01, .01)) +
+  
+  ## remover todos os elementos, exceto rótulos do eixo y + ajustar margem do gráfico
+  theme_void() +
+  theme(axis.text.y = element_text(size = 12, hjust = 1, family = "Fira Sans"),
+        plot.margin = margin(rep(15, 4)))+
+
+  labs(title = "Gráfico 02 - Relação das Coberturas de Céu de acordo com os Anos")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+
+### Referências
+<div style="text-align: justify"> 
+
+IQBAL, M. An Introduction to Solar Radiation. Ontario: Academic Press Canada,1983.
+
+PEREIRA, E. B.; MARTINS, F. R.; GONÇALVES, A. R.; COSTA, R. S.; LIMA. F. J. L.; RUTHER, R.; ABREU, S. L.; TIEPOLO, G. M.; PEREIRA, S. V.; SOUZA, J. G. Atlas Brasileiro de Energia Solar. 2 ed., São José dos Campos: Instituto Nacional de Pesquisas Espaciais, 2017.
+
+VAREJÃO-SILVA, M. A. Meteorologia e Climatologia. 2. ed., Recife: Mário Adelmo Varejão-Silva, 2006. Disponível em: http://www.icat.ufal.br/laboratorio/clima/data/uploads/pdf/METEOROLOGIA_E_CLIM ATOLOGIA_VD2_Mar_2006.pdf. Acesso em: 08 set. 2018.
+
+</div>
+ 
+<br>
+

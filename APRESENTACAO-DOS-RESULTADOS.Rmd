@@ -403,6 +403,30 @@ ggplot(dados_ghi, aes(x = V1, y = V2)) +
 
 ```
 
+```{r}
+library(tidyverse)
+ 
+# Grafico densidade demonstrando a variação da IrradiÃ¢ncia Horizontal Global pela variação da temperatura
+```
+
+```{r}
+# Hexbin chart with default option
+  ggplot(jan, aes(x=temperatura, y=ghi) ) +
+  geom_hex() +
+  labs (title = "GrÃ¡fico 06 Variação da Irradiação pela Temperatura") +
+  theme(plot.title = element_text(hjust = 0.5))
+  theme_bw()
+ 
+# Bin size control + color palette
+ggplot(jan, aes(x=temperatura, y=ghi) ) +
+  geom_hex(bins = 70) +
+  scale_fill_continuous(type = "viridis") +
+  theme_bw()
+```
+
+
+```{r}
+
 
 ### ReferÃªncias
 <div style="text-align: justify">

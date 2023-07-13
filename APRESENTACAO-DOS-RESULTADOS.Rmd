@@ -403,39 +403,157 @@ ggplot(dados_ghi, aes(x = V1, y = V2)) +
 
 ```
 
-```{r}
-library(tidyverse)
- 
-# Grafico densidade demonstrando a varia��o da Irradiância Horizontal Global pela varia��o da temperatura
-```
+<br>
 
-```{r}
-# Hexbin chart with default option
-  ggplot(jan, aes(x=temperatura, y=ghi) ) +
-  geom_hex() +
-  labs (title = "Gráfico 06 Varia��o da Irradia��o pela Temperatura") +
-  theme(plot.title = element_text(hjust = 0.5))
-  theme_bw()
- 
-# Bin size control + color palette
-ggplot(jan, aes(x=temperatura, y=ghi) ) +
-  geom_hex(bins = 70) +
-  scale_fill_continuous(type = "viridis") +
-  theme_bw()
-```
+### 2.2 Nuvens e Temperaturas
+<div style="text-align: justify; font-size: 16px;"> 
+A exaustão pelo calor é uma forma mais branda de doença relacionada ao calor que pode
+se desenvolver após vários dias de exposição a altas temperaturas e reposição inadequada
+ou desequilibrada de fluidos. Os mais propensos à exaustão pelo calor são os idosos e
+bebês / crianças, aqueles que apresentam pressão alta ou baixa, e também os indivíduos
+que trabalham ou se exercitam em um ambiente quente.<br>
+Com base nos dados adquiridos e trabalhados aqui, tentou-se realizar um gráfico de
+temperatura com base nos intervalos e a frequência dos mesmos no dataset. Trata-se de
+um gráfico mais simples, no entanto pode-se observar as temperaturas e as frequências
+que as mesmas aparecem durante os anos contidos no conjunto de dados.
+
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/06.jpg" alt="Gráfico de dados" width="600" >
+</div>
 
 
-```{r}
+<div style="text-align: justify; font-size: 16px;"> 
+E baseando-se ainda nas temperaturas do conjunto de dados, de maneira simples
+desenvolveu-se um gráfico para analisar a distribuição normal da Temperatura, como
+segue.
+
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/07.jpg" alt="Gráfico de dados" width="600" >
+</div>
+
+
+<div style="text-align: justify; font-size: 16px;"> 
+Nuvem é constituída de um conjunto visível de partículas diminutas de gelo ou água em
+seu estado líquido ou ainda de ambos ao mesmo tempo (mistas), que se encontram em
+suspensão na atmosfera, após terem se condensado ou liquefeito em virtude de fenômenos
+atmosféricos. A nuvem pode também conter partículas de água líquida ou de gelo em
+maiores dimensões e partículas procedentes, por exemplo, de vapores industriais, de
+fumaças ou de poeiras. <br>
+Uma nuvem pode ser formada por água, por gelo, ou até por ambos simultaneamente,
+suspensas na atmosfera, gotículas de água não congelam a 0°, e sim a temperaturas mais
+baixas. As gotas de água superesfriada podem conviver com o gelo dentro das nuvens.
+De um modo geral, nuvens altas são compostas exclusivamente de gelo, nuvens médias
+são mistas e as nuvens baixas são formadas apenas por água.<br>
+Visando relacionar as nuvens e suas densidades baseadas no tempo, desenvolveu-se um
+gráfico com o comando ggplot2, onde o tempo passou a ser considerado como minutos e
+horas, e analisou-se apenas um dia no gráfico e de maneira mais robusta
+
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/08.jpg" alt="Gráfico de dados" width="600" >
+</div>
+
+<div style="text-align: justify; font-size: 16px;"> 
+O processo para realização do gráfico, ocorreu por meio do comando ggplot2 e o pacote
+tidyverse. Analisando o gráfico, podemos notar um comportamento semelhante as curvas
+e suas densidades, nota-se também as cores predominantes do gráfico como sendo as de
+tempo 2 hrs a 2:15.
+
+</div>
+<br>
+
+
+<div style="text-align: center; font-size: 16px;"> 
+  **Gráfico 09 - Gráfico Densidade Demonstrando a Variação da Irradiância <br>
+  Horizontal Global pela variação da temperatura** <br>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/09.png" alt="Gráfico de dados" width="600" >
+</div>
+
+
+
+
+<div style="text-align: justify; font-size: 16px;"> 
+### 2.3 Phyton
+Além das analises realizadas no R, tambem foi realizada uma analise utilizando o Phyton, sendo que com esta analise foi possivel gerar gráficos que auxiliassem na conclusão de informações pertinentes.
+
+O código a seguir, se trata dos passos realizados no Phyton para dar inicio a analise:
+</div>
+
+<br>
+<div style="text-align: justify; font-size: 16px;"> 
+>Grafico radiação ( Ano / Temperatura)<br>
+Foram importados os pacotes necessários:<br>
+import pandas as pd # manipulação de dado em formato de dataframe<br>
+import seaborn as sns # biblioteca de visualização de informações estatísticas<br>
+import matplotlib.pyplot as plt # biblioteca de visualização de dados<br>
+import statsmodels.api as sm # biblioteca de modelagem estatística<br>
+import numpy as np # biblioteca para operações matemáticas multidimensionais<br>
+from statsmodels.iolib.summary2 import summary_col # comparação entre modelos<br>
+import plotly.graph_objs as go # gráfico 3D<br>
+from scipy.stats import pearsonr # correlações de Pearson<br>
+from sklearn.preprocessing import LabelEncoder # transformação de dados<br>
+# In[ ]:Importação do dataset e seleção das variáveis somente do mês de janeiro para analise<br>
+df_solar = pd.read_csv('dadosR.csv', delimiter =',')<br>
+df_solar<br>
+#selecionar somente mes Janeiro<br>
+df2 = df_solar.query('mes == 1')<br>
+#Estatísticas univariadas<br>
+df2.describe()<br>
+#Características das variáveis do dataset<br>
+df2.info()<br>
+import matplotlib<br>
+print('matplotlib: {}'.format(matplotlib.__version__))<br>
+# Iniciando com o gráfico básico (scatterplot)<br>
+# Neste caso, devemos especificar as variáveis dos eixos x e y no<br>
+sns.scatterplot(df2, x="ano", y="ghi")<br>
+# Vamos formatar um pouco mais o gráfico<br>
+sns.lineplot(df2, x="ano", y="ghi", hue="temperatura", marker="o")<br>
+plt.title("Radiação")<br>
+plt.xlabel('ano',fontsize=12)<br>
+plt.ylabel('energia',fontsize=12)<br>
+plt.legend(title='temperatura')<br>
+plt.show()<br>
+
+</div>
+
+<br>
+
+<div style="text-align: justify; font-size: 16px;"> 
+No Gráfico 10 podemos constatar  como a temperatura é uma variável que modifica a irradiância, o grafico ainda informa o comportamento em ambos os anos (2017-2021).
+</div>
+
+<br>
+
+<div style="text-align: center; font-size: 16px;"> 
+  **Gráfico 10 - Radiação Global Horizontal (ghi) x Temperatura x Anos** <br>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center; fig.align='center';">
+  <img src="G:/Meu Drive/01 - ACADÊMICO/00 - MESTRADO/2° SEMESTRE DISCIPLINAS/02 - FERRAMENTAS COMPUTACIONAIS DE MODELAGEM/PROJETO FINAL/IMAGENS/10.png" alt="Gráfico de dados" width="600" >
+</div>
+
+<br>
 
 
 ### Referências
 <div style="text-align: justify">
+Barbosa, h; FispoluiçãodoAr. Notas de Aula. 24. Universidade de São Paulo. Disponível em : http://www.fap.if.usp.br/~hbarbosa/uploads/Teaching/FisPoluicaoAr2016/Aula24_grupo4..pdf, acessado em : 11 de Julho de 2023 às 11:30
 
 CONTES CALÇA, M. V.; RANIERO, M. R.; FERNANDO, D. M. Z.; RODRIGUES, S. A.; DAL PAI, A. Outliers Detection in a Quality Control Procedure for Measurements of Solar Radiation. IEEE Latin America Transactions, [S. l.], v. 17, n. 11, p. 1815–1822, 2019. Disponível em: https://latamt.ieeer9.org/index.php/transactions/article/view/1490. Acesso em: 10 jul. 2023.
 
 IQBAL, M. An Introduction to Solar Radiation. Ontario: Academic Press Canada,1983.
 
 PEREIRA, E. B.; MARTINS, F. R.; GONÇALVES, A. R.; COSTA, R. S.; LIMA. F. J. L.; RUTHER, R.; ABREU, S. L.; TIEPOLO, G. M.; PEREIRA, S. V.; SOUZA, J. G. Atlas Brasileiro de Energia Solar. 2 ed., São José dos Campos: Instituto Nacional de Pesquisas Espaciais, 2017.
+
+UNIVERSIDADE DE SÃO PAULO (USP), Curso de  Introdução ao Python e Machine Learning, 2023.
 
 VAREJÃO-SILVA, M. A. Meteorologia e Climatologia. 2. ed., Recife: Mário Adelmo Varejão-Silva, 2006. Disponível em: http://www.icat.ufal.br/laboratorio/clima/data/uploads/pdf/METEOROLOGIA_E_CLIM ATOLOGIA_VD2_Mar_2006.pdf. Acesso em: 08 set. 2018.
 
